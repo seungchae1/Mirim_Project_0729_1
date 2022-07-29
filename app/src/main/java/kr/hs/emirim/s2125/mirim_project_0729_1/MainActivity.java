@@ -8,23 +8,49 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     EditText edit1, edit2;
+    RadioGroup rg;
+    Character a; // 어떤 계산인지 결정
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         edit1 = findViewById(R.id.edit1);
         edit2 = findViewById(R.id.edit2);
-        Button btnPlus = findViewById(R.id.btn_plus);
+
+        rg= findViewById(R.id.rg);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (rg.getCheckedRadioButtonId()){
+                    case R.id.plus:
+                        a='+';
+                        break;
+                    case R.id.minus:
+                        a='-';
+                        break;
+                    case R.id.multi:
+                        a='*';
+                        break;
+                    case R.id.divi:
+                        a='/';
+                        break;
+                }
+            }
+        });
+
+        Button btnPlus = findViewById(R.id.btn);
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
                 intent.putExtra("num1", Integer.parseInt(edit1.getText().toString()));
                 intent.putExtra("num2", Integer.parseInt(edit2.getText().toString()));
+                intent.putExtra("a",a);
                 startActivityForResult(intent,0);
             }
         });
@@ -35,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
-            int sum = data.getIntExtra("sum",0);
+            int sum = data.getIntExtra("result",0);
             Toast.makeText(getApplicationContext(), "덧셈결과 : "+sum, Toast.LENGTH_LONG).show();
         }
     }
