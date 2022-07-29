@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             int sum = data.getIntExtra("result",0);
-            Toast.makeText(getApplicationContext(), "덧셈결과 : "+sum, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "계산결과 : "+sum, Toast.LENGTH_LONG).show();
         }
     }
 }
