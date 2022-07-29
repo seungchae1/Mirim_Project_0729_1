@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_main);
         edit1 = findViewById(R.id.edit1);
         edit2 = findViewById(R.id.edit2);
         Button btnPlus = findViewById(R.id.btn_plus);
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             int sum = data.getIntExtra("sum",0);
-            Toast.makeText(getApplicationContext(), "덧셈결과 : "+sum, Toast.LENGTH_LONG).show(); //Toast.LENGTH_LONG => 토스트가 나타나있는 시간
+            Toast.makeText(getApplicationContext(), "덧셈결과 : "+sum, Toast.LENGTH_LONG).show();
         }
     }
 }
